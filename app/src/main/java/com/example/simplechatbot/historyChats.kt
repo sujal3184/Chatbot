@@ -17,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.simplechatbot.ui.theme.ChatBubble
@@ -26,16 +27,17 @@ fun Historychats(navController: NavController, chats: List<ChatMessage>) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(12.dp)
     ) {
         // Back button
         IconButton(
             onClick = { navController.navigateUp() },
-            modifier = Modifier.padding(bottom = 16.dp)
+            modifier = Modifier.padding(bottom = 16.dp, top = 24.dp)
         ) {
             Icon(
                 imageVector = Icons.Default.ArrowBack,
-                contentDescription = "Back to History"
+                contentDescription = "Back to History",
+                tint = Color.White
             )
         }
 

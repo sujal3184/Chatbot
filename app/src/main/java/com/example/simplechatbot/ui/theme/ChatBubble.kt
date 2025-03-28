@@ -7,6 +7,7 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -18,19 +19,35 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ContentCopy
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.simplechatbot.ChatMessage
 
 @Composable
 fun ChatBubble(message: ChatMessage){
+
+    var showDropdown by remember { mutableStateOf(false) }
+    val clipboardManager = LocalClipboardManager.current
+
+
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = if(message.isUser) Arrangement.End else Arrangement.Start,
@@ -59,15 +76,46 @@ fun ChatBubble(message: ChatMessage){
                     )
                     .padding(16.dp)
                     .widthIn(max = 250.dp)
+                    .pointerInput(Unit) {
+                        detectTapGestures(
+                            onLongPress = {
+                                showDropdown = true
+                            }
+                        )
+                    }
             ) {
                 Text(
                     text = message.text,
                     color = Color.White,
                     fontSize = 16.sp
                 )
+
+                DropdownMenu(
+                    expanded = showDropdown,
+                    onDismissRequest = { showDropdown = false },
+                    // Position the dropdown based on whether it's a user or AI message
+                    modifier = Modifier.align(
+                        if(message.isUser) Alignment.TopEnd else Alignment.TopStart
+                    )
+                ) {
+                    DropdownMenuItem(
+                        text = { Text("Copy", color = Color.White)  },
+                        onClick = {
+                            clipboardManager.setText(AnnotatedString(message.text))
+                            showDropdown = false
+                        },
+                        leadingIcon = {
+                            Icon(
+                                Icons.Default.ContentCopy,
+                                contentDescription = "Copy"
+                            )
+                        }
+                    )
+                }
             }
         }
     }
+
     Spacer(Modifier.height(24.dp))
 }
 

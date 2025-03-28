@@ -166,13 +166,13 @@ fun SearchScreen( navController: NavController,viewModel: ChatbotViewModel = vie
                         },
                         modifier = Modifier
                             .background(Color.DarkGray, shape = CircleShape)
-                            .size(32.dp)
+                            .size(44.dp)
                     ) {
                         Icon(
                             imageVector = Icons.Default.Send,
                             tint = Color.White,
                             contentDescription = "Send message",
-                            modifier = Modifier.size(20.dp)
+                            modifier = Modifier.size(24.dp)
                         )
                     }
                 }
