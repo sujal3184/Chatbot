@@ -86,7 +86,10 @@ fun SessionItem(
             .fillMaxWidth()
             .padding(8.dp)
             .clickable { onSessionClick() },
-        elevation = CardDefaults.cardElevation(4.dp)
+        elevation = CardDefaults.cardElevation(4.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.DarkGray
+        )
     ) {
         Row(
             modifier = Modifier
@@ -100,7 +103,8 @@ fun SessionItem(
                     text = session.chatTitle,
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp
+                    fontSize = 18.sp,
+                    color = Color.White
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
@@ -113,7 +117,7 @@ fun SessionItem(
                 Icon(
                     imageVector = Icons.Default.Delete,
                     contentDescription = "Delete Session",
-                    tint = MaterialTheme.colorScheme.error
+                    tint = Color.White
                 )
             }
         }
@@ -142,6 +146,8 @@ fun HistoryScreen(navController: NavController, chatbotViewModel: ChatbotViewMod
         Spacer(modifier = Modifier.height(16.dp))
 
         Divider()
+
+        Spacer(modifier = Modifier.height(16.dp))
 
         SavedSessionsList(
             viewModel = chatbotViewModel,
