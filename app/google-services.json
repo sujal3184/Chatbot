@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "334005810562",
+    "project_id": "simplechatbot-34f95",
+    "storage_bucket": "simplechatbot-34f95.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:334005810562:android:4c66573ed497a0664ccb9b",
+        "android_client_info": {
+          "package_name": "com.example.simplechatbot"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIePeuRDCbluf3IZUSbpaPLnR7ElLZt1A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
