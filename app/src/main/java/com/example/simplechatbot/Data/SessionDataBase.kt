@@ -7,7 +7,7 @@ import androidx.room.TypeConverters
 
 @Database(
     entities = [Session::class],
-    version = 1,
+    version = 2, // Increment version number
     exportSchema = false
 )
 @TypeConverters(Converters::class)

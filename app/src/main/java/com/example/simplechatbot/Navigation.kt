@@ -6,26 +6,43 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.simplechatbot.Data.Session
+import com.example.simplechatbot.AuthPages.AuthViewModel
+import com.example.simplechatbot.AuthPages.LoginPage
+import com.example.simplechatbot.AuthPages.ProfileScreen
+import com.example.simplechatbot.AuthPages.SignupPage
 
 
 @Composable
 fun Navigation(
     navController: NavHostController = rememberNavController(),
-    sharedViewModel: ChatbotViewModel = viewModel()
+    sharedViewModel: ChatbotViewModel = viewModel(),
+    authViewModel: AuthViewModel = AuthViewModel()
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.HomeScreen.route
+        startDestination = Screen.LoginScreen.route
     ) {
+        // authentication
+
+        composable(Screen.LoginScreen.route) {
+            LoginPage(navController,authViewModel)
+        }
+
+        composable(Screen.SignupScreen.route) {
+            SignupPage(navController,authViewModel)
+        }
+
+        composable(Screen.ProfieScreen.route) {
+            ProfileScreen(navController,authViewModel)
+        }
+
+
+
+        // orig
         composable(Screen.HomeScreen.route) {
-            MainScreen(navController)
+            MainScreen(navController, authViewModel)
         }
         composable(Screen.SearchScreen.route) {
             SearchScreen(navController, sharedViewModel)

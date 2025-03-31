@@ -14,7 +14,10 @@ interface SessionDAO {
     @Delete
     suspend fun deleteSession(session: Session)
 
+    @Query("SELECT * FROM chatSessions WHERE userID = :userID")
+    suspend fun getSessionsByUserID(userID: String): List<Session>
+
+    // Keep this for admin purposes if needed
     @Query("SELECT * FROM chatSessions")
     suspend fun getAllSessions(): List<Session>
-
 }

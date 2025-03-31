@@ -11,8 +11,11 @@ data class Session(
     @PrimaryKey(autoGenerate = true)
     val chatID: Int = 0,
 
+    @ColumnInfo(name = "userID")
+    val userID: String = "",  // Add this field to store Firebase user ID
+
     @ColumnInfo(name = "Chat Title")
-    val chatTitle : String = "",
+    val chatTitle: String = "",
 
     @ColumnInfo(name = "ChatMessages")
     val chatMessage: List<ChatMessage> = emptyList()

@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
     id("kotlin-kapt")
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -61,6 +62,8 @@ dependencies {
     implementation(libs.common)
     implementation(libs.identity.jvm)
     implementation(libs.firebase.crashlytics.buildtools)
+    implementation(libs.firebase.auth)
+    implementation(libs.androidx.runtime.livedata)
     kapt("androidx.room:room-compiler:2.6.1")
 
 // Navigation and UI dependencies

@@ -2,18 +2,20 @@ package com.example.simplechatbot
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import java.util.UUID
 import com.example.simplechatbot.Data.Session
 import com.example.simplechatbot.Data.SessionRepository
 import com.example.simplechatbot.ui.theme.ApiIntegrator
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 
 class ChatbotViewModel(
-    private val sessionRepository: SessionRepository = Graph.sessionRepository
+    private val sessionRepository: SessionRepository = Graph.sessionRepository,
 ) : ViewModel() {
+
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     private val _chatHistory = MutableStateFlow<List<ChatMessage>>(emptyList())
     val chatHistory: StateFlow<List<ChatMessage>> = _chatHistory
@@ -73,16 +75,20 @@ class ChatbotViewModel(
         currentSession = null
     }
 
-    // Save current chat session
+    // Update this function to save with the current user's ID
     fun saveCurrentSession(title: String? = null) {
         viewModelScope.launch {
             val chatMessages = _chatHistory.value
 
+            // Get current user ID
+            val currentUserID = auth.currentUser?.uid ?: return@launch
+
             // Generate a title if not provided
             val sessionTitle = title ?: generateSessionTitle(chatMessages)
 
-            // Create a new session
+            // Create a new session with user ID
             val session = Session(
+                userID = currentUserID, // Add user ID
                 chatTitle = sessionTitle,
                 chatMessage = chatMessages
             )
@@ -94,12 +100,19 @@ class ChatbotViewModel(
             loadSavedSessions()
         }
     }
-
     // Load saved sessions
-    private fun loadSavedSessions() {
+    fun loadSavedSessions() {
         viewModelScope.launch {
-            val sessions = sessionRepository.getAllSessions()
-            _savedSessions.value = sessions
+            val currentUserID = auth.currentUser?.uid
+
+            if (currentUserID != null) {
+                // Get only the current user's sessions
+                val sessions = sessionRepository.getSessionsByUserID(currentUserID)
+                _savedSessions.value = sessions
+            } else {
+                // No user is signed in
+                _savedSessions.value = emptyList()
+            }
         }
     }
 
