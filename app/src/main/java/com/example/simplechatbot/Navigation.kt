@@ -19,6 +19,7 @@ import com.example.simplechatbot.AuthPages.AuthViewModel
 import com.example.simplechatbot.AuthPages.LoginPage
 import com.example.simplechatbot.AuthPages.ProfileScreen
 import com.example.simplechatbot.AuthPages.SignupPage
+import com.google.firebase.auth.FirebaseAuth
 
 
 @Composable
@@ -41,9 +42,14 @@ fun Navigation(
         activity?.finish()
     }
 
+    BackHandler(enabled = navController.currentBackStackEntry?.destination?.route == Screen.LoginScreen.route) {
+        // Exit app when back is pressed from Login
+        activity?.finish()
+    }
+
     NavHost(
         navController = navController,
-        startDestination = Screen.LoginScreen.route
+        startDestination = if(FirebaseAuth.getInstance().currentUser != null) Screen.HomeScreen.route else Screen.LoginScreen.route
     ) {
         // authentication
 
