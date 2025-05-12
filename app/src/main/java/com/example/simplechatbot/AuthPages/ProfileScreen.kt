@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NavController
 import com.example.simplechatbot.Screen
+import com.example.simplechatbot.auth.AuthViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 @Composable
@@ -157,7 +158,7 @@ fun ProfileScreen(navController : NavController, authViewModel: AuthViewModel) {
                     }
                     TextButton(
                         onClick = {
-                            authViewModel.signout()
+                            authViewModel.signOut()
                             showLogoutDialog.value = false
                             navController.navigate(Screen.LoginScreen.route){
                                 popUpTo(0)

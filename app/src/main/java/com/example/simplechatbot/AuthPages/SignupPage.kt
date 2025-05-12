@@ -27,13 +27,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.simplechatbot.Screen
+import com.example.simplechatbot.auth.AuthViewModel
+import com.example.simplechatbot.googleSignIn.AuthState
 
 @Composable
 fun SignupPage(navController: NavController, authViewModel: AuthViewModel){
     var email by remember{ mutableStateOf("") }
     var password by remember{ mutableStateOf("") }
 
-    val authState = authViewModel.authstate.observeAsState()
+    val authState = authViewModel.authState.observeAsState()
     val context = LocalContext.current
     LaunchedEffect(authState.value) {
         when (authState.value) {
@@ -72,7 +74,7 @@ fun SignupPage(navController: NavController, authViewModel: AuthViewModel){
         Spacer(Modifier.height(32.dp))
 
         Button(onClick = {
-            authViewModel.Signup(email,password)
+            authViewModel.signup(email,password)
         },
             colors = ButtonDefaults.buttonColors(
             containerColor = Color.White,

@@ -86,6 +86,9 @@ dependencies {
     implementation ("androidx.compose.material:material-icons-extended:1.7.8")
     implementation ("androidx.compose.material3:material3:1.3.1")
 
+    // Google Sign-In
+    implementation ("com.google.android.gms:play-services-auth:20.7.0")
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
