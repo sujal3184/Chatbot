@@ -57,20 +57,20 @@ dependencies {
     implementation ("com.google.code.gson:gson:2.10.1")
 
     // Room dependencies
-    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-runtime:2.7.2")
     implementation("androidx.room:room-ktx:2.5.2")
     implementation(libs.common)
     implementation(libs.identity.jvm)
     implementation(libs.firebase.crashlytics.buildtools)
     implementation(libs.firebase.auth)
     implementation(libs.androidx.runtime.livedata)
-    kapt("androidx.room:room-compiler:2.6.1")
+    kapt("androidx.room:room-compiler:2.7.2")
 
 // Navigation and UI dependencies
-    implementation("androidx.navigation:navigation-compose:2.8.9")
-    implementation("androidx.compose.ui:ui:1.7.8")
-    implementation("androidx.compose.material:material:1.7.8")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.7.8")
+    implementation("androidx.navigation:navigation-compose:2.9.1")
+    implementation("androidx.compose.ui:ui:1.8.3")
+    implementation("androidx.compose.material:material:1.8.3")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.8.3")
 
     // Gemini API
     implementation ("com.google.ai.client.generativeai:generativeai:0.9.0")
@@ -80,14 +80,14 @@ dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
     // ViewModel
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.1")
 
     implementation ("androidx.compose.material:material-icons-extended:1.7.8")
     implementation ("androidx.compose.material3:material3:1.3.1")
 
     // Google Sign-In
-    implementation ("com.google.android.gms:play-services-auth:20.7.0")
+    implementation ("com.google.android.gms:play-services-auth:21.3.0")
 
 
     implementation(libs.androidx.core.ktx)
